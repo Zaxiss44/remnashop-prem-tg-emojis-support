@@ -4,7 +4,7 @@ from aiogram.enums import ButtonStyle
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram_dialog import StartMode
-from aiogram_dialog.widgets.kbd import CopyText, Group, ListGroup, Row, Start, Url, WebApp
+from aiogram_dialog.widgets.kbd import Button, CopyText, Group, ListGroup, Row, Start, Url, WebApp
 from aiogram_dialog.widgets.style import Style
 from aiogram_dialog.widgets.text import Format
 from magic_filter import F
@@ -17,6 +17,31 @@ from src.telegram.widgets.emoji_config import get_emoji_id
 
 CALLBACK_CHANNEL_CONFIRM: Final[str] = "channel_confirm"
 CALLBACK_RULES_ACCEPT: Final[str] = "rules_accept"
+
+
+async def on_custom_text_button(
+    callback: "CallbackQuery",
+    widget: "Button",
+    dialog_manager: "DialogManager",
+) -> None:
+    """Handle TEXT-type custom buttons — sends the payload text as a message."""
+    # item_id is set by ListGroup to the index of the clicked button
+    item_id = getattr(dialog_manager, "item_id", None)
+    if item_id is None:
+        await callback.answer("Ошибка: кнопка не найдена", show_alert=True)
+        return
+
+    # Look up the payload from the map populated by the getter
+    payloads = dialog_manager.dialog_data.get("text_button_payloads", {})
+    payload = payloads.get(str(item_id))
+
+    if not payload:
+        await callback.answer("Текст не задан", show_alert=True)
+        return
+
+    if callback.message:
+        await callback.message.answer(payload)
+    await callback.answer()
 
 
 def build_buttons_row(row: int) -> Group:
@@ -38,6 +63,13 @@ def build_buttons_row(row: int) -> Group:
                 text=Format("{item.text}"),
                 url=Format("{item.payload}"),
                 when=F["item"].type == ButtonType.WEB_APP,
+                style=DynamicEmojiStyle(emoji_id=F["item"].emoji_id),
+            ),
+            Button(
+                text=Format("{item.text}"),
+                id="text_send",
+                on_click=on_custom_text_button,
+                when=F["item"].type == ButtonType.TEXT,
                 style=DynamicEmojiStyle(emoji_id=F["item"].emoji_id),
             ),
             id=f"custom_buttons_row_{row}",

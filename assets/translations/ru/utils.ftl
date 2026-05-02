@@ -395,6 +395,7 @@ button-type = { $button_type ->
     [URL] Открыть ссылку
     [COPY] Скопировать текст
     [WEB_APP] Открыть веб-приложение
+    [TEXT] Отправить текст
     *[OTHER] { $button_type }
 }
 

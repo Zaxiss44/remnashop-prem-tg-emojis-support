@@ -84,6 +84,13 @@ async def menu_getter(
             "row_3_buttons": [b for b in menu_data.custom_buttons if b.index in (5, 6) and _is_button_valid(b)],
         }
 
+        # Store TEXT button payloads in dialog_data for the click handler
+        dialog_manager.dialog_data["text_button_payloads"] = {
+            str(b.index): b.payload
+            for b in menu_data.custom_buttons
+            if b.type == ButtonType.TEXT and b.payload
+        }
+
         if not menu_data.current_subscription:
             logger.debug(f"User {user.telegram_id} has no active subscription")
             data["trial_available"] = menu_data.is_trial_available and menu_data.available_trial
