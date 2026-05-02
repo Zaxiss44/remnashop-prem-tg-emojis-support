@@ -9,7 +9,7 @@ from src.core.constants import PAYMENT_PREFIX
 from src.core.enums import BannerName, PaymentGatewayType, PurchaseType
 from src.telegram.keyboards import back_main_menu_button, connect_buttons
 from src.telegram.states import Subscription
-from src.telegram.widgets import Banner, I18nFormat, IgnoreUpdate
+from src.telegram.widgets import Banner, I18nEmojiStyle, I18nFormat, IgnoreUpdate
 
 from .getters import (
     confirm_getter,
@@ -38,18 +38,21 @@ subscription = Window(
             id=f"{PAYMENT_PREFIX}{PurchaseType.NEW}",
             on_click=on_subscription_plans,
             when=~F["has_active_subscription"],
+            style=I18nEmojiStyle("btn-subscription.new"),
         ),
         Button(
             text=I18nFormat("btn-subscription.renew"),
             id=f"{PAYMENT_PREFIX}{PurchaseType.RENEW}",
             on_click=on_subscription_plans,
             when=F["has_active_subscription"] & F["is_not_unlimited"],
+            style=I18nEmojiStyle("btn-subscription.renew"),
         ),
         Button(
             text=I18nFormat("btn-subscription.change"),
             id=f"{PAYMENT_PREFIX}{PurchaseType.CHANGE}",
             on_click=on_subscription_plans,
             when=F["has_active_subscription"],
+            style=I18nEmojiStyle("btn-subscription.change"),
         ),
     ),
     # Row(
@@ -139,6 +142,7 @@ duration = Window(
             id=f"{PAYMENT_PREFIX}back_plans",
             state=Subscription.PLANS,
             when=~F["only_single_plan"],
+            style=I18nEmojiStyle("btn-subscription.back-plans"),
         ),
     ),
     *back_main_menu_button,
@@ -173,6 +177,7 @@ payment_method = Window(
             id=f"{PAYMENT_PREFIX}back",
             state=Subscription.DURATION,
             when=~F["only_single_duration"],
+            style=I18nEmojiStyle("btn-subscription.back-duration"),
         ),
     ),
     Row(
@@ -181,6 +186,7 @@ payment_method = Window(
             id=f"{PAYMENT_PREFIX}back_plans",
             state=Subscription.PLANS,
             when=~F["only_single_plan"],
+            style=I18nEmojiStyle("btn-subscription.back-plans"),
         ),
     ),
     *back_main_menu_button,
@@ -197,14 +203,14 @@ confirm = Window(
             text=I18nFormat("btn-subscription.pay"),
             url=Format("{url}"),
             when=F["url"],
-            style=Style(ButtonStyle.SUCCESS),
+            style=I18nEmojiStyle("btn-subscription.pay", ButtonStyle.SUCCESS),
         ),
         Button(
             text=I18nFormat("btn-subscription.get"),
             id=f"{PAYMENT_PREFIX}get",
             on_click=on_get_subscription,
             when=~F["url"],
-            style=Style(ButtonStyle.SUCCESS),
+            style=I18nEmojiStyle("btn-subscription.get", ButtonStyle.SUCCESS),
         ),
     ),
     Row(
@@ -213,12 +219,14 @@ confirm = Window(
             id=f"{PAYMENT_PREFIX}back_payment_method",
             state=Subscription.PAYMENT_METHOD,
             when=~F["only_single_gateway"] & ~F["is_free"],
+            style=I18nEmojiStyle("btn-subscription.back-payment-method"),
         ),
         SwitchTo(
             text=I18nFormat("btn-subscription.back-duration"),
             id=f"{PAYMENT_PREFIX}back_duration",
             state=Subscription.DURATION,
             when=F["only_single_gateway"] & ~F["only_single_duration"] | F["is_free"],
+            style=I18nEmojiStyle("btn-subscription.back-duration"),
         ),
     ),
     Row(
@@ -227,6 +235,7 @@ confirm = Window(
             id=f"{PAYMENT_PREFIX}back_plans",
             state=Subscription.PLANS,
             when=~F["only_single_plan"],
+            style=I18nEmojiStyle("btn-subscription.back-plans"),
         ),
     ),
     *back_main_menu_button,

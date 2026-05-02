@@ -451,21 +451,21 @@ btn-importer =
     .import-active = ❇️ Импортировать активных
 
 btn-subscription =
-    .plan = 💳 Перейти к оформлению подписки
-    .new = 💸 Купить подписку
-    .renew = 🔄 Продлить
-    .change = 🔃 Изменить
-    .promocode = 🎟 Активировать промокод
+    .plan = Перейти к оформлению подписки
+    .new = Купить подписку
+    .renew = Продлить
+    .change = Изменить
+    .promocode = Активировать промокод
     .payment-method = { gateway-type } | { $final_amount ->
     [0] 🎁
     *[HAS] { $final_amount }{ $currency }
     }
-    .pay = 💳 Оплатить
-    .get = 🎁 Получить бесплатно
-    .back-plans = ⬅️ Назад к выбору плана
-    .back-duration = ⬅️ Изменить длительность
-    .back-payment-method = ⬅️ Изменить способ оплаты
-    .connect = 🚀 Подключиться
+    .pay = Оплатить
+    .get = Получить бесплатно
+    .back-plans = Назад к выбору плана
+    .back-duration = Изменить длительность
+    .back-payment-method = Изменить способ оплаты
+    .connect = Подключиться
 
     .duration = { $period } | { $final_amount -> 
     [0] 🎁

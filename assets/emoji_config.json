@@ -40,5 +40,18 @@
     "btn-common.cancel": null,
     "btn-common.notification-close": "5985346521103604145",
     "btn-common.devices-empty": "5881702736843511327",
-    "btn-common.duration": "5776213190387961618"
+    "btn-common.duration": "5776213190387961618",
+
+    "_section_subscription": "--- Подписка ---",
+    "btn-subscription.new": null,
+    "btn-subscription.renew": null,
+    "btn-subscription.change": null,
+    "btn-subscription.plan": null,
+    "btn-subscription.promocode": null,
+    "btn-subscription.pay": null,
+    "btn-subscription.get": null,
+    "btn-subscription.back-plans": null,
+    "btn-subscription.back-duration": null,
+    "btn-subscription.back-payment-method": null,
+    "btn-subscription.connect": null
 }
