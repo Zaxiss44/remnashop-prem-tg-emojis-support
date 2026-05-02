@@ -1,5 +1,7 @@
 from typing import Any
 
+from src.core.enums import ButtonType
+
 from aiogram_dialog import DialogManager
 from dishka import FromDishka
 from dishka.integrations.aiogram_dialog import inject
@@ -18,6 +20,17 @@ from src.core.utils.i18n_helpers import (
     i18n_format_traffic_limit,
 )
 from src.core.utils.time import get_traffic_reset_delta
+
+
+def _is_button_valid(button: Any) -> bool:
+    """Skip buttons that would cause Telegram API errors (e.g. COPY with empty payload)."""
+    payload = getattr(button, "payload", None)
+    if not payload or not str(payload).strip():
+        return False
+    btn_type = getattr(button, "type", None)
+    if btn_type == ButtonType.COPY and len(str(payload)) > 256:
+        return False
+    return True
 
 
 @inject
@@ -66,9 +79,9 @@ async def menu_getter(
             "expire_time": None,
             "reset_time": None,
             "connection_url": None,
-            "row_1_buttons": [b for b in menu_data.custom_buttons if b.index in (1, 2)],
-            "row_2_buttons": [b for b in menu_data.custom_buttons if b.index in (3, 4)],
-            "row_3_buttons": [b for b in menu_data.custom_buttons if b.index in (5, 6)],
+            "row_1_buttons": [b for b in menu_data.custom_buttons if b.index in (1, 2) and _is_button_valid(b)],
+            "row_2_buttons": [b for b in menu_data.custom_buttons if b.index in (3, 4) and _is_button_valid(b)],
+            "row_3_buttons": [b for b in menu_data.custom_buttons if b.index in (5, 6) and _is_button_valid(b)],
         }
 
         if not menu_data.current_subscription:
