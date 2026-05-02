@@ -1,0 +1,44 @@
+{
+    "_comment": "Маппинг i18n-ключей кнопок на Telegram Premium Emoji ID. Чтобы узнать ID эмодзи, отправьте его боту @RawDataBot и найдите custom_emoji_id в ответе. Поставьте null чтобы убрать эмодзи с кнопки.",
+
+    "_section_main_menu": "--- Главное меню ---",
+    "btn-menu.trial": "5792071541084659564",
+    "btn-menu.connect": "5451641781684837123",
+    "btn-menu.connect-not-available": null,
+    "btn-menu.devices": "5451837705207980603",
+    "btn-menu.subscription": "5452134221160165907",
+    "btn-menu.invite": "5451999719964321603",
+    "btn-menu.support": "5451704471027491472",
+    "btn-menu.dashboard": null,
+
+    "_section_back": "--- Кнопки назад ---",
+    "btn-back.general": "5877536313623711363",
+    "btn-back.menu": "5875082500023258804",
+    "btn-back.menu-return": "5875082500023258804",
+    "btn-back.dashboard": "5875082500023258804",
+
+    "_section_devices": "--- Устройства ---",
+    "btn-devices.delete-all": "5931476386987380989",
+    "btn-devices.reissue": "5127377673596700174",
+    "btn-devices.confirm-delete": "5985596818912712352",
+    "btn-devices.confirm-reissue": "5985596818912712352",
+    "btn-devices.cancel-reissue": "5985346521103604145",
+
+    "_section_requirement": "--- Требования ---",
+    "btn-requirement.rules-accept": "5888553613407559045",
+    "btn-requirement.channel-join": "5792138143142517911",
+    "btn-requirement.channel-confirm": "5985596818912712352",
+
+    "_section_invite": "--- Реферальная программа ---",
+    "btn-invite.about": "5883997877172179131",
+    "btn-invite.copy": "5913702317667913862",
+    "btn-invite.send": "5920090136627908485",
+    "btn-invite.qr": "6005682147573109056",
+    "btn-invite.withdraw-points": "5224257782013769471",
+
+    "_section_common": "--- Общие ---",
+    "btn-common.cancel": null,
+    "btn-common.notification-close": "5985346521103604145",
+    "btn-common.devices-empty": "5881702736843511327",
+    "btn-common.duration": "5776213190387961618"
+}
