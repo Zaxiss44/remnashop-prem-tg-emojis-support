@@ -8,6 +8,7 @@ from src.telegram.keyboards import back_main_menu_button, main_menu_button
 from src.telegram.states import Dashboard, DashboardImporter
 from src.telegram.widgets.banner import Banner
 from src.telegram.widgets.i18n_format import I18nFormat
+from src.telegram.widgets.dynamic_emoji_style import I18nEmojiStyle
 from src.telegram.widgets.ignore_update import IgnoreUpdate
 
 from .getters import from_xui_getter, import_completed_getter, squads_getter, sync_completed_getter
