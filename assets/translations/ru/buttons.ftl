@@ -1,12 +1,12 @@
 btn-back = 
-    .general = ⬅ Назад
-    .menu = ↩ Главное меню
-    .menu-return = ↩ Вернуться в главное меню
-    .dashboard = ↩ Вернуться в панель управления
+    .general = Назад
+    .menu = Главное меню
+    .menu-return = Вернуться в главное меню
+    .dashboard = Вернуться в панель управления
 
 btn-common =
-    .notification-close = ✖ Закрыть
-    .devices-empty = ❌ У вас нет подключённых устройств
+    .notification-close = Закрыть
+    .devices-empty = У вас нет подключённых устройств
     .cancel = Отмена
 
     .squad-choice = { $selected -> 
@@ -14,17 +14,17 @@ btn-common =
     *[0] ⚪
     } { $name }
 
-    .duration = ⏳ { $value ->
+    .duration = { $value ->
     [0] { unlimited }
     *[other] { unit-day }
     }
 
 btn-devices =
-    .delete-all = 📲 Удалить все устройства
-    .reissue = 🔄 Перевыпустить подписку
-    .confirm-delete = ✅ Да, удалить
-    .confirm-reissue = ✅ Да, сбросить
-    .cancel-reissue = ❌ Нет
+    .delete-all = Удалить все устройства
+    .reissue = Перевыпустить подписку
+    .confirm-delete = Да, удалить
+    .confirm-reissue = Да, сбросить
+    .cancel-reissue = Нет
 
 btn-remnashop-info =
     .release-latest = 👀 Посмотреть
@@ -35,17 +35,17 @@ btn-remnashop-info =
     .guide = ❓ Инструкция
 
 btn-requirement =
-    .rules-accept = ✅ Принять правила
-    .channel-join = ❤ Перейти в канал
-    .channel-confirm = ✅ Подтвердить
+    .rules-accept = Принять правила
+    .channel-join = Перейти в канал
+    .channel-confirm = Подтвердить
 
 btn-menu =
-    .trial = 🎁 ПОПРОБОВАТЬ БЕСПЛАТНО
-    .connect = 🚀 Подключиться
-    .devices = 📱 Устройства
-    .subscription = ⭐ Подписка
-    .invite = 🔗 Пригласить
-    .support = 👥 Поддержка
+    .trial = ПОПРОБОВАТЬ БЕСПЛАТНО
+    .connect = Подключиться
+    .devices = Устройства
+    .subscription = Подписка
+    .invite = Пригласить
+    .support = Поддержка
     .dashboard = 🛠 Панель управления
 
     .connect-not-available =
@@ -56,11 +56,11 @@ btn-menu =
     } ⚠️
 
 btn-invite =
-    .about = ⭐ Подробнее о награде
-    .copy = ⭐ Скопировать ссылку
-    .send = ⭐ Пригласить
-    .qr = ⭐ QR-код
-    .withdraw-points = ⭐ Обменять баллы
+    .about = Подробнее о награде
+    .copy = Скопировать ссылку
+    .send = Пригласить
+    .qr = QR-код
+    .withdraw-points = Обменять баллы
 
 btn-dashboard =
     .statistics = 📊 Статистика
