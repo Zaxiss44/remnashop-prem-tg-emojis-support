@@ -120,6 +120,14 @@ class ReferralSettingsDto(TrackableMixin):
 
 
 @dataclass(kw_only=True)
+class InlineButtonDto(TrackableMixin):
+    text: str
+    url: Optional[str] = None
+    callback_data: Optional[str] = None
+    emoji_id: Optional[str] = None
+
+
+@dataclass(kw_only=True)
 class MenuButtonDto(TrackableMixin):
     index: int
     text: str = "btn-test"
@@ -128,6 +136,10 @@ class MenuButtonDto(TrackableMixin):
     is_active: bool = False
     required_role: Role = Role.USER
     emoji_id: Optional[str] = None
+    disable_web_page_preview: bool = False
+    inline_buttons: list[InlineButtonDto] = field(
+        default_factory=lambda: [InlineButtonDto(text="btn-back.menu", callback_data="back_to_menu")]
+    )
 
 
 @dataclass(kw_only=True)

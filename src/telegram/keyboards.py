@@ -1,7 +1,7 @@
 from typing import Final, Optional
 
 from aiogram.enums import ButtonStyle
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, LinkPreviewOptions
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram_dialog import StartMode
 from aiogram_dialog.widgets.kbd import Button, CopyText, Group, ListGroup, Row, Start, Url, WebApp
@@ -32,15 +32,46 @@ async def on_custom_text_button(
         return
 
     # Look up the payload from the map populated by the getter
-    payloads = dialog_manager.dialog_data.get("text_button_payloads", {})
-    payload = payloads.get(str(item_id))
+    buttons_info = dialog_manager.dialog_data.get("text_buttons", {})
+    btn_info = buttons_info.get(str(item_id))
 
-    if not payload:
+    if not btn_info or not btn_info.get("payload"):
         await callback.answer("Текст не задан", show_alert=True)
         return
 
+    payload = btn_info["payload"]
+    disable_preview = btn_info.get("disable_web_page_preview", False)
+    inline_buttons_data = btn_info.get("inline_buttons", [])
+    
+    i18n = dialog_manager.middleware_data.get("i18n")
+
+    builder = InlineKeyboardBuilder()
+    for ib in inline_buttons_data:
+        text = ib["text"]
+        if i18n and (text.startswith("btn-") or text.startswith("msg-")):
+            text = i18n.get(text)
+            
+        cb_data = ib.get("callback_data")
+        if cb_data == "back_to_menu":
+            cb_data = f"{GOTO_PREFIX}{MainMenu.MAIN.state}"
+            
+        btn = InlineKeyboardButton(
+            text=text,
+            url=ib.get("url"),
+            callback_data=cb_data,
+        )
+        if ib.get("emoji_id"):
+            btn.icon_custom_emoji_id = ib["emoji_id"]
+        builder.row(btn)
+
+    reply_markup = builder.as_markup() if inline_buttons_data else None
+
     if callback.message:
-        await callback.message.answer(payload)
+        await callback.message.answer(
+            text=payload,
+            reply_markup=reply_markup,
+            link_preview_options=LinkPreviewOptions(is_disabled=disable_preview) if disable_preview else None
+        )
     await callback.answer()
 
 

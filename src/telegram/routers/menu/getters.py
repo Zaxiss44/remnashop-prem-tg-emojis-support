@@ -84,9 +84,21 @@ async def menu_getter(
             "row_3_buttons": [b for b in menu_data.custom_buttons if b.index in (5, 6) and _is_button_valid(b)],
         }
 
-        # Store TEXT button payloads in dialog_data for the click handler
-        dialog_manager.dialog_data["text_button_payloads"] = {
-            str(b.index): b.payload
+        # Store TEXT button info in dialog_data for the click handler
+        dialog_manager.dialog_data["text_buttons"] = {
+            str(b.index): {
+                "payload": b.payload,
+                "disable_web_page_preview": getattr(b, "disable_web_page_preview", False),
+                "inline_buttons": [
+                    {
+                        "text": ib.text,
+                        "url": ib.url,
+                        "callback_data": ib.callback_data,
+                        "emoji_id": ib.emoji_id,
+                    }
+                    for ib in getattr(b, "inline_buttons", [])
+                ],
+            }
             for b in menu_data.custom_buttons
             if b.type == ButtonType.TEXT and b.payload
         }
